@@ -9,6 +9,10 @@ axiosInstance.defaults.headers.common["Authorization"] =
 
 export const getTrendingMovies = async (time_window) => {
 	const movies = await axiosInstance.get(`/trending/movie/${time_window}`);
-	console.log(movies.data);
 	return movies.data;
+};
+
+export const getMovieDetails = async (movieID) => {
+	const movie = await axiosInstance.get(`/movie/${movieID}`);
+	return movie.data;
 };

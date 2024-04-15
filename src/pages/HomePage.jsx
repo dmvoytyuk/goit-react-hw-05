@@ -9,7 +9,7 @@ const HomePage = () => {
 		const fetchTrendingMovies = async () => {
 			try {
 				const fetchedTrendingMovies = await getTrendingMovies("day");
-				setTrendingMovies(fetchedTrendingMovies);
+				setTrendingMovies(fetchedTrendingMovies.results);
 			} catch (error) {
 				console.log(error);
 			} finally {
@@ -20,8 +20,8 @@ const HomePage = () => {
 
 	return (
 		<>
-			<h1>Trending Movies today</h1>
-			{trendingMovies && <MovieList moviesList={trendingMovies.results} />}
+			<h1>Trending Movies Today</h1>
+			{trendingMovies && <MovieList moviesList={trendingMovies} />}
 		</>
 	);
 };

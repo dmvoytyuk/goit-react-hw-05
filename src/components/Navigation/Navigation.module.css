@@ -1,0 +1,17 @@
+.navBar {
+  display: flex;
+  gap: 20px;
+  background-color: blanchedalmond;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.link {
+  color: black;
+}
+
+.activeLink {
+  color: orange;
+}
