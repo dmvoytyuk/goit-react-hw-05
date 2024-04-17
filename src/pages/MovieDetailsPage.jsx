@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { useParams, Link, Routes, Route } from "react-router-dom";
 import { getMovieDetails } from "../utils/api";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
-import Cast from "../components/Cast/Cast";
-import Reviews from "../components/Reviews/Reviews";
 import Loader from "../components/Loader/Loader";
+
+const Cast = lazy(() => import("../components/Cast/Cast"));
+const Reviews = lazy(() => import("../components/Reviews/Reviews"));
 
 const MovieDetailsPage = () => {
 	const [movie, setMovie] = useState(null);
@@ -42,10 +43,12 @@ const MovieDetailsPage = () => {
 							<Link to="reviews">Reviews</Link>
 						</li>
 					</ul>
-					<Routes>
-						<Route path="cast" element={<Cast movieId={movieId} />} />
-						<Route path="reviews" element={<Reviews movieId={movieId} />} />
-					</Routes>
+					<Suspense fallback={<Loader />}>
+						<Routes>
+							<Route path="cast" element={<Cast movieId={movieId} />} />
+							<Route path="reviews" element={<Reviews movieId={movieId} />} />
+						</Routes>
+					</Suspense>
 				</div>
 			)}
 			{isLoading && <Loader />}
