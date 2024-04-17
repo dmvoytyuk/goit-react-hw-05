@@ -9,7 +9,7 @@ const Reviews = lazy(() => import("../components/Reviews/Reviews"));
 
 const MovieDetailsPage = () => {
 	const [movie, setMovie] = useState(null);
-	const [isError, setIsErrot] = useState(false);
+	const [isError, setIsError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const { movieId } = useParams();
 
@@ -21,7 +21,7 @@ const MovieDetailsPage = () => {
 				setMovie((currMovie) => fetchedMovie);
 			} catch (error) {
 				console.log(error);
-				setIsErrot(true);
+				setIsError(true);
 			} finally {
 				setIsLoading(false);
 			}
