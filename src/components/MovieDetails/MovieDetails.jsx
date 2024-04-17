@@ -11,7 +11,7 @@ const MovieDetails = ({ movie }) => {
 		}
 	});
 
-	const backLink = useRef(location.state ?? "/");
+	const backLink = useRef(location.state ?? "/movies");
 
 	return (
 		<>

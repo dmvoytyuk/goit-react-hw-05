@@ -4,21 +4,25 @@ import { getMovieDetails } from "../utils/api";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
 import Cast from "../components/Cast/Cast";
 import Reviews from "../components/Reviews/Reviews";
+import Loader from "../components/Loader/Loader";
 
 const MovieDetailsPage = () => {
 	const [movie, setMovie] = useState(null);
 	const [isError, setIsErrot] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const { movieId } = useParams();
 
 	useEffect(() => {
 		const fetchMovieDetails = async (movieId) => {
 			try {
+				setIsLoading(true);
 				const fetchedMovie = await getMovieDetails(movieId);
 				setMovie((currMovie) => fetchedMovie);
 			} catch (error) {
 				console.log(error);
 				setIsErrot(true);
 			} finally {
+				setIsLoading(false);
 			}
 		};
 		fetchMovieDetails(movieId);
@@ -44,6 +48,7 @@ const MovieDetailsPage = () => {
 					</Routes>
 				</div>
 			)}
+			{isLoading && <Loader />}
 			{isError && <p>Oops, something went wrong</p>}
 		</>
 	);
