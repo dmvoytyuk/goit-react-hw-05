@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, Routes, Route } from "react-router-dom";
 import { getMovieDetails } from "../utils/api";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
+import Cast from "../components/Cast/Cast";
+import Reviews from "../components/Reviews/Reviews";
 
 const MovieDetailsPage = () => {
 	const [movie, setMovie] = useState(null);
@@ -23,13 +25,27 @@ const MovieDetailsPage = () => {
 	}, [movieId]);
 
 	return (
-		<div>
-			{movie && <MovieDetails movie={movie} />}
-			{movie && <Cast />}
-			{movie && <Reviews />}
+		<>
+			{movie && (
+				<div>
+					<MovieDetails movie={movie} />
+					<p>Additional information</p>
+					<ul>
+						<li>
+							<Link to="cast">Cast</Link>
+						</li>
+						<li>
+							<Link to="reviews">Reviews</Link>
+						</li>
+					</ul>
+					<Routes>
+						<Route path="cast" element={<Cast movieId={movieId} />} />
+						<Route path="reviews" element={<Reviews movieId={movieId} />} />
+					</Routes>
+				</div>
+			)}
 			{isError && <p>Oops, something went wrong</p>}
-			<p>go back</p>
-		</div>
+		</>
 	);
 };
 

@@ -1,16 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const MovieList = ({ moviesList }) => {
-	return (
+	const location = useLocation();
+	return moviesList.length > 0 ? (
 		<ul>
 			{moviesList.map((movie) => {
 				return (
 					<li key={movie.id}>
-						<Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+						<Link state={location} to={`/movies/${movie.id}`}>
+							{movie.title}
+						</Link>
 					</li>
 				);
 			})}
 		</ul>
+	) : (
+		<p>No movies found</p>
 	);
 };
 
