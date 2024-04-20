@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { getMovieCast } from "../../utils/api";
-import CastList from "../CastList/CastList";
-import Loader from "../Loader/Loader";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
+import { getMovieCast } from '../../utils/api';
+import CastList from '../CastList/CastList';
+import Loader from '../Loader/Loader';
 
 const Cast = ({ movieId }) => {
 	const [cast, setCast] = useState(null);
